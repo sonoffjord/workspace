@@ -18,9 +18,11 @@ class ColumnSerializer(serializers.ModelSerializer):
 
 
 class BoardSummarySerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Board
-        fields = ('title', 'description', 'owner')
+        fields = ('title', 'description', 'owner',)
+        read_only_fields = ('owner',)
 
 
 class BoardDetailSerializer(serializers.ModelSerializer):
