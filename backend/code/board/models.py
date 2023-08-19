@@ -6,7 +6,7 @@ class Board(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     owner = models.ForeignKey(User, related_name='board_owner', on_delete=models.CASCADE)
-    member = models.ManyToManyField(User, related_name='board_members', through='Membership', blank=True, null=True)
+    member = models.ManyToManyField(User, related_name='boards', through='Membership', blank=True, null=True)
     is_public = models.BooleanField(default=False)
 
     def __str__(self):

@@ -10,7 +10,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class ColumnSerializer(serializers.ModelSerializer):
-    tasks = TaskSerializer()
+    tasks = TaskSerializer(many=True)
 
     class Meta:
         model = Column
@@ -18,16 +18,19 @@ class ColumnSerializer(serializers.ModelSerializer):
 
 
 class BoardSummarySerializer(serializers.ModelSerializer):
+    owner = serializers.CharField()
     
     class Meta:
         model = Board
-        fields = ('title', 'description', 'owner',)
+        fields = ('title', 'description', 'owner', 'is_public')
         read_only_fields = ('owner',)
 
 
 class BoardDetailSerializer(serializers.ModelSerializer):
-    columns = ColumnSerializer()
+    owner = serializers.CharField()
+    member = serializers.CharField()
+    columns = ColumnSerializer(many=True)
 
     class Meta:
         model = Board
-        fields = ('title', 'description', 'owner', 'member', 'columns')
+        fields = ('title', 'description', 'owner', 'is_public', 'member', 'columns')
